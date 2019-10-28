@@ -1,0 +1,3672 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AAML API",
+    "description": "REST API Implentation for Afrinvest",
+    "version": "2.0"
+  },
+  "servers": [
+    {
+      "url": "http://10.0.0.27:9090/api/api-v2.0/core/rest",
+      "description": "API Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "user_oauth_token": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "tokenUrl": "http://olympus.prowork.me/auth/user/token",
+            "scopes": {
+              "read": "Grant read access",
+              "write": "Grants write access"
+            }
+          }
+        }
+      },
+      "client_oauth_token": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "http://api.mobile.afrinvest.com/auth/client/token",
+            "scopes": {
+              "read": "Grant read access"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "customerid": {
+        "name": "customerid",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "organisationId": {
+        "name": "organisationId",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "bvn": {
+        "name": "bvn",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "customername": {
+        "name": "customername",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "accountid": {
+        "name": "accountid",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "email": {
+        "name": "email",
+        "in": "path",
+        "schema": {
+          "type": "string",
+          "format": "email"
+        },
+        "required": true
+      },
+      "phoneno": {
+        "name": "phoneno",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "productid": {
+        "name": "productid",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "accountno": {
+        "name": "accountno",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "staffid": {
+        "name": "staffid",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "startdate": {
+        "name": "startdate",
+        "in": "path",
+        "schema": {
+          "type": "string",
+          "format": "date"
+        },
+        "required": true
+      },
+      "enddate": {
+        "name": "enddate",
+        "in": "path",
+        "schema": {
+          "type": "string",
+          "format": "date"
+        },
+        "required": true
+      },
+      "fundid": {
+        "name": "fundid",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "placementid": {
+        "name": "placementid",
+        "in": "path",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      }
+    },
+    "schemas": {
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "CUSTOMER_ID": {
+            "type": "string"
+          },
+          "CREATED_ON": {
+            "type": "string",
+            "format": "date"
+          },
+          "CUSTOMER_TYPE": {
+            "type": "string"
+          },
+          "IS_MINOR": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "IS_STAFF": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "KYC_COMPLETED": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "IS_BLACKLISTED": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "BLACKLISTED_ON": {
+            "type": "string",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "CUSTOMER_NAME": {
+            "type": "string"
+          },
+          "FIRST_NAME": {
+            "type": "string"
+          },
+          "OTHER_NAME": {
+            "type": "string"
+          },
+          "LAST_NAME": {
+            "type": "string"
+          },
+          "NATIONALITY": {
+            "type": "string"
+          },
+          "CUSTOMER_ADDRESS": {
+            "type": "string"
+          },
+          "CUSTOMER_CITY": {
+            "type": "string"
+          },
+          "EMAIL_ADDRESS": {
+            "type": "string",
+            "format": "email"
+          },
+          "PHONE_NUMBERS": {
+            "type": "string"
+          }
+        }
+      },
+      "CashAccount": {
+        "type": "object",
+        "properties": {
+          "CUSTOMER_NO": {
+            "type": "string"
+          },
+          "ACCOUNT_NO": {
+            "type": "string"
+          },
+          "ACCOUNT_NAME": {
+            "type": "string"
+          },
+          "AVAILABLE_BALANCE": {
+            "type": "string"
+          },
+          "CURRENT_BALANCE": {
+            "type": "string"
+          },
+          "ACCRUED_CREDIT_INTEREST": {
+            "type": "string"
+          },
+          "ACCRUED_DEBIT_INTEREST": {
+            "type": "string"
+          },
+          "CURRENCY_ID": {
+            "type": "string"
+          },
+          "CURRENCY_NAME": {
+            "type": "string"
+          },
+          "PRODUCT_ID": {
+            "type": "string"
+          },
+          "PRODUCT_NAME": {
+            "type": "string"
+          },
+          "DATE_OPENED": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "PRODUCT_ID": {
+            "type": "string"
+          },
+          "PRODUCT_NAME": {
+            "type": "string"
+          }
+        }
+      },
+      "CashBalance": {
+        "type": "object",
+        "properties": {
+          "AVAILABLE_BALANCE": {
+            "type": "string"
+          },
+          "CURRENT_BALANCE": {
+            "type": "string"
+          }
+        }
+      },
+      "Organisation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "logo_url": {
+            "type": "string",
+            "format": "url"
+          },
+          "owner_id": {
+            "type": "integer",
+            "description": "the id of the user that created the organisation\n"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CashAccountOfficer": {
+        "type": "object",
+        "properties": {
+          "STAFF_ID": {
+            "type": "string"
+          },
+          "STAFF_FIRST_NAME": {
+            "type": "string"
+          },
+          "STAFF_LAST_NAME": {
+            "type": "string"
+          },
+          "EMAIL_ADDRESS": {
+            "type": "string",
+            "format": "email"
+          }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "BUSINESS_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "PROCESSING_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "EFFECTIVE_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "TRANSACTION_NUMBER": {
+            "type": "string"
+          },
+          "TRANSACTION_TYPE": {
+            "type": "string",
+            "enum": [
+              "CREDIT"
+            ]
+          },
+          "ACCOUNT_NO": {
+            "type": "string"
+          },
+          "CUSTOMER_NO": {
+            "type": "string"
+          },
+          "ACCOUNT_NAME": {
+            "type": "string"
+          },
+          "EXTERNAL_REFERENCE": {
+            "type": "string"
+          },
+          "CURRENCY_ID": {
+            "type": "string"
+          },
+          "TRANSACTION_DESCRIPTION": {
+            "type": "string"
+          },
+          "TRANSACTION_AMOUNT": {
+            "type": "string"
+          },
+          "TRANSACTION_REFERENCE": {
+            "type": "string"
+          },
+          "IS_REVERSED": {
+            "type": "string",
+            "enum": [
+              "no",
+              "yes"
+            ]
+          }
+        }
+      },
+      "Fund": {
+        "type": "object",
+        "properties": {
+          "FUND_ID": {
+            "type": "string"
+          },
+          "FUND_DESCRIPTION": {
+            "type": "string"
+          },
+          "FUND_CURRENCY": {
+            "type": "string"
+          },
+          "FUND_TYPE": {
+            "type": "string"
+          },
+          "DATE_OPENED": {
+            "type": "string",
+            "format": "date"
+          },
+          "MINIMUM_INVESTMENT_AMOUNT": {
+            "type": "string"
+          },
+          "INVESTMENT_BASIS": {
+            "type": "string"
+          },
+          "SUBSEQUENT_MULTIPLES": {
+            "type": "string"
+          },
+          "RISK_LEVEL": {
+            "type": "string"
+          },
+          "LOGO": {
+            "type": "string",
+            "format": "url"
+          },
+          "YIELD": {
+            "type": "string"
+          },
+          "SCHEME_TYPE": {
+            "type": "string"
+          }
+        }
+      },
+      "FundPrice": {
+        "type": "object",
+        "properties": {
+          "FUND_ID": {
+            "type": "string"
+          },
+          "FUND_DESCRIPTION": {
+            "type": "string"
+          },
+          "VALUE_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "BID_PRICE": {
+            "type": "string"
+          },
+          "OFFER_PRICE": {
+            "type": "string"
+          }
+        }
+      },
+      "FundAccount": {
+        "type": "object",
+        "properties": {
+          "FUND_ID": {
+            "type": "string"
+          },
+          "FUND_DESCRIPTION": {
+            "type": "string"
+          },
+          "FUND_CURRENCY": {
+            "type": "string"
+          },
+          "IS_MONEY_MARKET": {
+            "type": "string",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "CUSTOMER_ID": {
+            "type": "string"
+          },
+          "CUSTOMER_NAME": {
+            "type": "string"
+          },
+          "ACCOUNT_ID": {
+            "type": "string"
+          },
+          "ACCOUNT_DESCRIPTION": {
+            "type": "string"
+          },
+          "BALANCE_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "TOTAL_PURCHASE_QUANTITY": {
+            "type": "string"
+          },
+          "TOTAL_SALE_QUANTITY": {
+            "type": "string"
+          },
+          "TOTAL_BONUS_QUANTITY": {
+            "type": "string"
+          },
+          "BALANCE_QUANTITY": {
+            "type": "string"
+          },
+          "TOTAL_PURCHASE_AMOUNT": {
+            "type": "string"
+          },
+          "TOTAL_SALE_AMOUNT": {
+            "type": "string"
+          },
+          "TOTAL_DIVIDEND_AMOUNT": {
+            "type": "string"
+          },
+          "TOTAL_ACCRUED_AMOUNT": {
+            "type": "string"
+          },
+          "OUTSTANDING_ACCRUED_INTEREST": {
+            "type": "string"
+          },
+          "COST_PRICE": {
+            "type": "string"
+          },
+          "COST_VALUE": {
+            "type": "string"
+          },
+          "CURRENT_BID_PRICE": {
+            "type": "string"
+          },
+          "CURRENT_VALUE": {
+            "type": "string"
+          },
+          "GAIN_LOSS_AMOUNT": {
+            "type": "string"
+          },
+          "CASH_ACCOUNT_ID": {
+            "type": "string"
+          },
+          "CASH_ACCOUNT_DESCRIPTION": {
+            "type": "string"
+          }
+        }
+      },
+      "FundTransaction": {
+        "type": "object",
+        "properties": {
+          "FUND_ID": {
+            "type": "string"
+          },
+          "FUND_DESCRIPTION": {
+            "type": "string"
+          },
+          "FUND_CURRENCY": {
+            "type": "string"
+          },
+          "IS_MONEY_MARKET": {
+            "type": "string",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "CUSTOMER_ID": {
+            "type": "string"
+          },
+          "CUSTOMER_NAME": {
+            "type": "string"
+          },
+          "ACCOUNT_ID": {
+            "type": "string"
+          },
+          "ACCOUNT_DESCRIPTION": {
+            "type": "string"
+          },
+          "TRANSACTION_TYPE": {
+            "type": "string"
+          },
+          "BALANCE_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "EFFECTIVE_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "TRANSACTION_QUANTITY": {
+            "type": "string"
+          },
+          "CREDIT_QUANTITY": {
+            "type": "string"
+          },
+          "TRANSACTION_PRICE": {
+            "type": "string"
+          },
+          "TRANSASCTION_AMOUNT": {
+            "type": "string"
+          },
+          "TRANSACTION_DESCRIPTION": {
+            "type": "string"
+          },
+          "TRANSACTION_REFERENCE": {
+            "type": "string"
+          },
+          "IS_TRANSFER": {
+            "type": "string",
+            "enum": [
+              1,
+              0
+            ]
+          }
+        }
+      },
+      "Portfolio": {
+        "type": "object",
+        "properties": {
+          "ACCOUNT_ID": {
+            "type": "string"
+          },
+          "ACCOUNT_NAME": {
+            "type": "string"
+          },
+          "ACCOUNTTYPE": {
+            "type": "string"
+          },
+          "CURRENCY_ID": {
+            "type": "string"
+          },
+          "PRODUCT_NAME": {
+            "type": "string"
+          },
+          "PRINCIPAL": {
+            "type": "string"
+          },
+          "RATE": {
+            "type": "string"
+          },
+          "TENOR": {
+            "type": "string"
+          },
+          "EFFECTIVE_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "MATURITY_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "ACCRUED_INTEREST": {
+            "type": "string"
+          }
+        }
+      },
+      "Placement": {
+        "type": "object",
+        "properties": {
+          "FUND_ID": {
+            "type": "string"
+          },
+          "FUND_DESCRIPTION": {
+            "type": "string"
+          },
+          "PRODUCT_ID": {
+            "type": "string"
+          },
+          "PRODUCT_DESC": {
+            "type": "string"
+          },
+          "CUSTOMER_ID": {
+            "type": "string"
+          },
+          "CUSTOMER_NAME": {
+            "type": "string"
+          },
+          "PLACEMENT_ID": {
+            "type": "string"
+          },
+          "ACCOUNT_TYPE": {
+            "type": "string"
+          },
+          "REVALUATION_SEQUENCE": {
+            "type": "string"
+          },
+          "CURRENCY_ID": {
+            "type": "string"
+          },
+          "CURRENCY_DESCRIPTION": {
+            "type": "string"
+          },
+          "INVESTMENT_AMOUNT": {
+            "type": "string"
+          },
+          "EFFECTIVE_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "TENOR_DAYS": {
+            "type": "string"
+          },
+          "MATURITY_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "MATURITY_MANDATE": {
+            "type": "string"
+          },
+          "INTEREST_RATE": {
+            "type": "string"
+          },
+          "CURRENT_BALANCE": {
+            "type": "string"
+          },
+          "EXPECTED_GROSS_INTEREST": {
+            "type": "string"
+          },
+          "EXPECTED_NET_INTEREST": {
+            "type": "string"
+          },
+          "ACCRUED_INTEREST_AMOUNT": {
+            "type": "string"
+          },
+          "LAST_ACCRUED_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "TOTAL_INTEREST_PAID_AMOUNT": {
+            "type": "string"
+          },
+          "TOTAL_TAX_PAID_AMOUNT": {
+            "type": "string"
+          },
+          "STATUS": {
+            "type": "string"
+          },
+          "IS_CLOSED": {
+            "type": "string",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "TbillOrder": {
+        "type": "object",
+        "properties": {
+          "ORDER_ID": {
+            "type": "string"
+          },
+          "TBILL_ID": {
+            "type": "string"
+          },
+          "TBILL_DESCRIPTION": {
+            "type": "string"
+          },
+          "INVESTMENT_TYPE": {
+            "type": "string"
+          },
+          "INVESTMENT_DESC": {
+            "type": "string"
+          },
+          "CUSTOMER_ID": {
+            "type": "string"
+          },
+          "CUSTOMER_NAME": {
+            "type": "string"
+          },
+          "ACCOUNT_ID": {
+            "type": "string"
+          },
+          "ACCOUNT_TYPE": {
+            "type": "string"
+          },
+          "CURRENCY_ID": {
+            "type": "string"
+          },
+          "CURRENCY_DESCRIPTION": {
+            "type": "string"
+          },
+          "FACE_VALUE": {
+            "type": "string"
+          },
+          "YIELD": {
+            "type": "string"
+          },
+          "DISCOUNT_RATE": {
+            "type": "string"
+          },
+          "EFFECTIVE_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "ORDER_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "TENOR_DAYS": {
+            "type": "string"
+          },
+          "MATURITY_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "MATURITY_MANDATE": {
+            "type": "string"
+          },
+          "CURRENT_BALANCE": {
+            "type": "string"
+          },
+          "EXPECTED_GROSS_INTEREST": {
+            "type": "string"
+          },
+          "EXPECTED_NET_INTEREST": {
+            "type": "string"
+          },
+          "ACCRUED_INTEREST_AMOUNT": {
+            "type": "string"
+          },
+          "LAST_ACCRUED_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "TOTAL_INTEREST_PAID_AMOUNT": {
+            "type": "string"
+          },
+          "TOTAL_TAX_PAID_AMOUNT": {
+            "type": "string"
+          },
+          "STATUS": {
+            "type": "string"
+          },
+          "IS_CLOSED": {
+            "type": "string",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "REINVEST_INTEREST": {
+            "type": "string",
+            "enum": [
+              0,
+              1
+            ]
+          }
+        }
+      },
+      "Tbill": {
+        "type": "object",
+        "properties": {
+          "TBILL_ID": {
+            "type": "string"
+          },
+          "TBILL_DESCRIPTION": {
+            "type": "string"
+          },
+          "INVESTMENT_TYPE": {
+            "type": "string"
+          },
+          "INVESTMENT_DESC": {
+            "type": "string"
+          },
+          "CURRENCY_ID": {
+            "type": "string"
+          },
+          "CURRENCY_DESCRIPTION": {
+            "type": "string"
+          },
+          "FACE_VALUE": {
+            "type": "string"
+          },
+          "DISCOUNT_RATE": {
+            "type": "string"
+          },
+          "YIELD": {
+            "type": "string"
+          },
+          "TENOR_DAYS": {
+            "type": "string"
+          },
+          "MINIMUM_SUBSCRIPTION_AMOUNT": {
+            "type": "string"
+          },
+          "SUBSEQUENT_SUBSCRIPTION_MULTIPLES": {
+            "type": "string"
+          }
+        }
+      },
+      "TbillLiquidation": {
+        "type": "object",
+        "properties": {
+          "LIQUIDATION_ID": {
+            "type": "string"
+          },
+          "TBILL_ID": {
+            "type": "string"
+          },
+          "CUSTOMER_ID": {
+            "type": "string"
+          },
+          "CUSTOMER_NAME": {
+            "type": "string"
+          },
+          "ACCOUNT_ID": {
+            "type": "string"
+          },
+          "ACCOUNT_TYPE": {
+            "type": "string"
+          },
+          "CURRENCY_ID": {
+            "type": "string"
+          },
+          "CURRENCY_DESCRIPTION": {
+            "type": "string"
+          },
+          "FACE_VALUE": {
+            "type": "string"
+          },
+          "YIELD": {
+            "type": "string"
+          },
+          "DISCOUNT_RATE": {
+            "type": "string"
+          },
+          "REQUESTED_DATE": {
+            "type": "string",
+            "format": "date"
+          },
+          "STATUS": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/GetCustomerByID/{customerid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customerid"
+        }
+      ],
+      "get": {
+        "summary": "Get Customer By ID",
+        "description": "Returns an array of customer details\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of customers\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerByID": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Customer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerByBank/{bvn}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/bvn"
+        }
+      ],
+      "get": {
+        "summary": "Get Customer By Bank",
+        "description": "Returns a list of Customers by Bank\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of customers\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerByBank": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Customer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerByName/{customername}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customername"
+        }
+      ],
+      "get": {
+        "summary": "Get Customer By Name",
+        "description": "Returns a list of Customers by Name\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of customers\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerByName": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Customer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerByCashAccount/{accountid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accountid"
+        }
+      ],
+      "get": {
+        "summary": "Get Customer By Cash Account",
+        "description": "Returns a list of Customers by cash account\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of customers\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerByCashAccount": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Customer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerByEmail/{email}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/email"
+        }
+      ],
+      "get": {
+        "summary": "Get Customer By Email",
+        "description": "Returns a list of Customers by email\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of customers\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerByEmail": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Customer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerByPhone/{phoneno}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/phoneno"
+        }
+      ],
+      "get": {
+        "summary": "Get Customer By Phone Number",
+        "description": "Returns a list of Customers by phone number\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of customers\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerByPhone": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Customer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerByProduct/{productid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/productid"
+        }
+      ],
+      "get": {
+        "summary": "Get Customer By Product ID",
+        "description": "Returns a list of Customers by product ID\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of customers\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerByProduct": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Customer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCashAccountByAccountNo/{accountno}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accountno"
+        }
+      ],
+      "get": {
+        "summary": "Get Cash Account by Account Number",
+        "description": "Returns an array of account details\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of account details\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCashAccountByAccountNo": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/CashAccount"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCashAccounts/{customerid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customerid"
+        }
+      ],
+      "get": {
+        "summary": "Get Cash Account by Account Number",
+        "description": "Returns an array of account details\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of account details\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCashAccounts": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/CashAccount"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCashAccountsByPhoneNo/{phoneno}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/phoneno"
+        }
+      ],
+      "get": {
+        "summary": "Get Cash Account by Phone Number",
+        "description": "Returns an array of account details\n",
+        "responses": {
+          "200": {
+            "description": "returns an array of account details\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCashAccounts": {
+                            "type": "array",
+                            "items": {
+                              "allOf": [
+                                {
+                                  "$ref": "#/components/schemas/CashAccount"
+                                },
+                                {
+                                  "$ref": "#/components/schemas/Customer"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetProducts": {
+      "get": {
+        "summary": "Get Products",
+        "description": "Returns an array of products\n",
+        "responses": {
+          "200": {
+            "description": "Returns an array of balance information\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetProducts": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Product"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCashBalance/{accountno}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accountno"
+        }
+      ],
+      "get": {
+        "summary": "Get Cash Balance",
+        "description": "Returns an array of balance information\n",
+        "responses": {
+          "200": {
+            "description": "Returns an array of balance information\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCashBalance": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/CashBalance"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCashAccountOfficer/{staffid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/staffid"
+        }
+      ],
+      "get": {
+        "summary": "Get Cash Account Officer",
+        "description": "Returns an array of account officer information\n",
+        "responses": {
+          "200": {
+            "description": "Returns an array of account officer information\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCashAccountOfficer": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/CashAccountOfficer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCashAccountTransactionByCurrentDate/{accountno}/{startdate}/{enddate}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accountno"
+        },
+        {
+          "$ref": "#/components/parameters/startdate"
+        },
+        {
+          "$ref": "#/components/parameters/enddate"
+        }
+      ],
+      "get": {
+        "summary": "Get Cash Account Transaction by Date",
+        "description": "Returns an array of products\n",
+        "responses": {
+          "200": {
+            "description": "Returns an array of balance information\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCashAccountTransactionByCurrentDate": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Transaction"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CashDeposit": {
+      "post": {
+        "summary": "Make Cash Deposit",
+        "description": "Process a new deposit",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "deposit": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "customer": {
+                          "type": "string"
+                        },
+                        "account": {
+                          "type": "string"
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "amount": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "type": "string"
+                        },
+                        "contra": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Process a new deposit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "TransactionNo": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CashDepositReversal": {
+      "post": {
+        "summary": "Reverse Cash Deposit",
+        "description": "Process a new cash deposit reversal",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reversal": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "account": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Process a new deposit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "TransactionNo": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CashWithdrawal": {
+      "post": {
+        "summary": "Make Cash Withdrawal",
+        "description": "Process a new cash withdrawal",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "withdrawal": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "customer": {
+                          "type": "string"
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "amount": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "account": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "type": "string"
+                        },
+                        "contra": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Process a new cash withdrawal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "TransactionNo": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CashWithdrawalReversal": {
+      "post": {
+        "summary": "Reverse Cash Withdrawal",
+        "description": "Process a new cash withdrawal reversal",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reversal": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "account": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Process a new deposit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "TransactionNo": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetFunds": {
+      "get": {
+        "summary": "Get Mutual Funds",
+        "description": "Returns a list of funds\n",
+        "responses": {
+          "200": {
+            "description": "Returns a list of funds\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetFunds": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Fund"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetFundPrice/{fundid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/fundid"
+        }
+      ],
+      "get": {
+        "summary": "Get Mutual Funds Current Prices",
+        "description": "Returns a list of mutual fund prices\n",
+        "responses": {
+          "200": {
+            "description": "Returns a list of mutual fund prices\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetFundPrice": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/FundPrice"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetFundPrices/{fundid}/{startdate}/{enddate}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/fundid"
+        },
+        {
+          "$ref": "#/components/parameters/startdate"
+        },
+        {
+          "$ref": "#/components/parameters/enddate"
+        }
+      ],
+      "get": {
+        "summary": "Get Mutual Funds Current Prices",
+        "description": "Returns a list of mutual fund prices\n",
+        "responses": {
+          "200": {
+            "description": "Returns a list of mutual fund prices\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetFundPrices": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/FundPrice"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetFundAccounts/{customerid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customerid"
+        }
+      ],
+      "get": {
+        "summary": "Get Mutual Fund Accounts",
+        "description": "Returns a list of mutual fund accounts\n",
+        "responses": {
+          "200": {
+            "description": "Returns a list of mutual fund accounts\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetFundAccounts": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/FundAccount"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetFundAccount/{accountid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accountid"
+        }
+      ],
+      "get": {
+        "summary": "Get Mutual Fund Accounts",
+        "description": "Returns a list of mutual fund accounts\n",
+        "responses": {
+          "200": {
+            "description": "Returns a list of mutual fund accounts\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetFundAccount": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/FundAccount"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetFundTransactions/{accountid}/{startdate}/{enddate}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/accountid"
+        },
+        {
+          "$ref": "#/components/parameters/startdate"
+        },
+        {
+          "$ref": "#/components/parameters/enddate"
+        }
+      ],
+      "get": {
+        "summary": "Get Mutual Fund Transactions",
+        "description": "Returns a list of mutual fund transactions\n",
+        "responses": {
+          "200": {
+            "description": "Returns a list of mutual fund transactions\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetFundAccount": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/FundTransaction"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FundSubscription": {
+      "post": {
+        "summary": "Mutual Fund Subscription",
+        "description": "Process a new mutual fund subscription",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subscription": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fund": {
+                          "type": "string"
+                        },
+                        "account": {
+                          "type": "string"
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "price": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Process a new mutual fund subscription",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "TransactionNo": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FundRedemption": {
+      "post": {
+        "summary": "Mutual Fund Redemption",
+        "description": "Process a new mutual fund redemption",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subscription": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fund": {
+                          "type": "string"
+                        },
+                        "account": {
+                          "type": "string"
+                        },
+                        "date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "price": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Process a new mutual fund redemption",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "TransactionNo": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/NewIndividual": {
+      "post": {
+        "summary": "New Individual Creation",
+        "description": "Create A new Individual",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "title_cd": {
+                          "type": "string"
+                        },
+                        "last_name": {
+                          "type": "string"
+                        },
+                        "first_name": {
+                          "type": "string"
+                        },
+                        "other_names": {
+                          "type": "string"
+                        },
+                        "gender_cd": {
+                          "type": "string"
+                        },
+                        "marital_status_cd": {
+                          "type": "string"
+                        },
+                        "birth_date": {
+                          "type": "string"
+                        },
+                        "mother_maiden_name": {
+                          "type": "string"
+                        },
+                        "wedding_anniversary_date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "nationality_cd": {
+                          "type": "string"
+                        },
+                        "mobile_phone_no": {
+                          "type": "string"
+                        },
+                        "alternate_phone_no": {
+                          "type": "string"
+                        },
+                        "primary_email_address": {
+                          "type": "string"
+                        },
+                        "alternate_email_address": {
+                          "type": "string"
+                        },
+                        "address_street": {
+                          "type": "string"
+                        },
+                        "address_city": {
+                          "type": "string"
+                        },
+                        "address_state_cd": {
+                          "type": "string"
+                        },
+                        "address_country_cd": {
+                          "type": "string"
+                        },
+                        "address_zip_code": {
+                          "type": "string"
+                        },
+                        "occupation": {
+                          "type": "string"
+                        },
+                        "employer_name": {
+                          "type": "string"
+                        },
+                        "employment_job_title": {
+                          "type": "string"
+                        },
+                        "employer_reference": {
+                          "type": "string"
+                        },
+                        "employer_address_street": {
+                          "type": "string"
+                        },
+                        "employer_address_city": {
+                          "type": "string"
+                        },
+                        "employer_address_country_cd": {
+                          "type": "string"
+                        },
+                        "estimated_annual_income": {
+                          "type": "string"
+                        },
+                        "bank_cd": {
+                          "type": "string"
+                        },
+                        "bank_account_name": {
+                          "type": "string"
+                        },
+                        "bank_account_no": {
+                          "type": "string"
+                        },
+                        "bank_branch_name": {
+                          "type": "string"
+                        },
+                        "bank_address_details": {
+                          "type": "string"
+                        },
+                        "bank_bvn_no": {
+                          "type": "string"
+                        },
+                        "next_of_kin_title_cd": {
+                          "type": "string"
+                        },
+                        "next_of_kin_last_name": {
+                          "type": "string"
+                        },
+                        "next_of_kin_first_name": {
+                          "type": "string"
+                        },
+                        "next_of_kin_other_names": {
+                          "type": "string"
+                        },
+                        "next_of_kin_gender_cd": {
+                          "type": "string"
+                        },
+                        "next_of_kin_relationship_cd": {
+                          "type": "string"
+                        },
+                        "next_of_kin_telephone": {
+                          "type": "string"
+                        },
+                        "next_of_kin_email_address": {
+                          "type": "string"
+                        },
+                        "next_of_kin_address_street": {
+                          "type": "string"
+                        },
+                        "next_of_kin_address_city": {
+                          "type": "string"
+                        },
+                        "next_of_kin_address_country_cd": {
+                          "type": "string"
+                        },
+                        "next_of_kin_address_zip_code": {
+                          "type": "string"
+                        },
+                        "identity_doc_type_cd": {
+                          "type": "string"
+                        },
+                        "identity_doc_name": {
+                          "type": "string"
+                        },
+                        "identity_doc_no": {
+                          "type": "string"
+                        },
+                        "identity_doc_issue_date": {
+                          "type": "string"
+                        },
+                        "identity_doc_expiry_date": {
+                          "type": "string"
+                        },
+                        "identity_doc_issue_authority": {
+                          "type": "string"
+                        },
+                        "location_cd": {
+                          "type": "string"
+                        },
+                        "external_reference1": {
+                          "type": "string"
+                        },
+                        "external_reference2": {
+                          "type": "string"
+                        },
+                        "retain_customer_id": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "return the created individual",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "customerID": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UpdateIndividual": {
+      "post": {
+        "summary": "Individual Profile Update",
+        "description": "Updates the details for a customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customer": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "customer_id"
+                      ],
+                      "properties": {
+                        "customer_id": {
+                          "type": "string"
+                        },
+                        "title_cd": {
+                          "type": "string"
+                        },
+                        "last_name": {
+                          "type": "string"
+                        },
+                        "first_name": {
+                          "type": "string"
+                        },
+                        "other_names": {
+                          "type": "string"
+                        },
+                        "gender_cd": {
+                          "type": "string"
+                        },
+                        "marital_status_cd": {
+                          "type": "string"
+                        },
+                        "birth_date": {
+                          "type": "string"
+                        },
+                        "mother_maiden_name": {
+                          "type": "string"
+                        },
+                        "wedding_anniversary_date": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "nationality_cd": {
+                          "type": "string"
+                        },
+                        "mobile_phone_no": {
+                          "type": "string"
+                        },
+                        "alternate_phone_no": {
+                          "type": "string"
+                        },
+                        "alternate_email_address": {
+                          "type": "string"
+                        },
+                        "address_street": {
+                          "type": "string"
+                        },
+                        "address_city": {
+                          "type": "string"
+                        },
+                        "address_state_cd": {
+                          "type": "string"
+                        },
+                        "address_country_cd": {
+                          "type": "string"
+                        },
+                        "address_zip_code": {
+                          "type": "string"
+                        },
+                        "occupation": {
+                          "type": "string"
+                        },
+                        "employer_name": {
+                          "type": "string"
+                        },
+                        "employment_job_title": {
+                          "type": "string"
+                        },
+                        "employer_reference": {
+                          "type": "string"
+                        },
+                        "employer_address_street": {
+                          "type": "string"
+                        },
+                        "employer_address_city": {
+                          "type": "string"
+                        },
+                        "employer_address_country_cd": {
+                          "type": "string"
+                        },
+                        "estimated_annual_income": {
+                          "type": "string"
+                        },
+                        "bank_cd": {
+                          "type": "string"
+                        },
+                        "bank_account_name": {
+                          "type": "string"
+                        },
+                        "bank_account_no": {
+                          "type": "string"
+                        },
+                        "bank_branch_name": {
+                          "type": "string"
+                        },
+                        "bank_address_details": {
+                          "type": "string"
+                        },
+                        "bank_bvn_no": {
+                          "type": "string"
+                        },
+                        "next_of_kin_title_cd": {
+                          "type": "string"
+                        },
+                        "next_of_kin_last_name": {
+                          "type": "string"
+                        },
+                        "next_of_kin_first_name": {
+                          "type": "string"
+                        },
+                        "next_of_kin_other_names": {
+                          "type": "string"
+                        },
+                        "next_of_kin_gender_cd": {
+                          "type": "string"
+                        },
+                        "next_of_kin_relationship_cd": {
+                          "type": "string"
+                        },
+                        "next_of_kin_telephone": {
+                          "type": "string"
+                        },
+                        "next_of_kin_email_address": {
+                          "type": "string"
+                        },
+                        "next_of_kin_address_street": {
+                          "type": "string"
+                        },
+                        "next_of_kin_address_city": {
+                          "type": "string"
+                        },
+                        "next_of_kin_address_country_cd": {
+                          "type": "string"
+                        },
+                        "next_of_kin_address_zip_code": {
+                          "type": "string"
+                        },
+                        "identity_doc_type_cd": {
+                          "type": "string"
+                        },
+                        "identity_doc_name": {
+                          "type": "string"
+                        },
+                        "identity_doc_no": {
+                          "type": "string"
+                        },
+                        "identity_doc_issue_date": {
+                          "type": "string"
+                        },
+                        "identity_doc_expiry_date": {
+                          "type": "string"
+                        },
+                        "identity_doc_issue_authority": {
+                          "type": "string"
+                        },
+                        "location_cd": {
+                          "type": "string"
+                        },
+                        "external_reference1": {
+                          "type": "string"
+                        },
+                        "external_reference2": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "return the updated individual",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Customer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CashAccount": {
+      "post": {
+        "summary": "Cash Account Creation",
+        "description": "Creates a new customer cash account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "create": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "customer": {
+                          "type": "string"
+                        },
+                        "plan": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "mandate": {
+                          "type": "string"
+                        },
+                        "officer": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "creates a new customer cash account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "CashAccountNo": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FundAccount": {
+      "post": {
+        "summary": "Mutual Account Creation",
+        "description": "Creates a new mutual fund account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "create": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "customer": {
+                          "type": "string"
+                        },
+                        "fund": {
+                          "type": "string"
+                        },
+                        "account": {
+                          "type": "string"
+                        },
+                        "accountname": {
+                          "type": "string"
+                        },
+                        "registrar": {
+                          "type": "string"
+                        },
+                        "externalref": {
+                          "type": "string"
+                        },
+                        "reinvest": {
+                          "type": "string"
+                        },
+                        "reinvestpct": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "creates a new mutual fund account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "FundAccountNo": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/UpdateStatus": {
+      "get": {
+        "summary": "Check Update Status",
+        "description": "Returns true if ubdate in progress\n",
+        "responses": {
+          "200": {
+            "description": "Returns a list of funds\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "Update Running": {
+                            "type": "string",
+                            "enum": [
+                              false,
+                              true
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerPortfolios/{customerid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customerid"
+        }
+      ],
+      "get": {
+        "summary": "List of Portfolios",
+        "description": "returns a list of investment accounts\n",
+        "responses": {
+          "200": {
+            "description": "returns a list of investment accounts\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerPortfolios": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Portfolio"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerPortfolio/{customerid}/{accountid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customerid"
+        },
+        {
+          "$ref": "#/components/parameters/accountid"
+        }
+      ],
+      "get": {
+        "summary": "Portfolio Details",
+        "description": "returns a list of investment accounts\n",
+        "responses": {
+          "200": {
+            "description": "returns a list of investment accounts\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetCustomerPortfolio": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Portfolio"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CreateCustomerPortfolio": {
+      "post": {
+        "summary": "Create Portfolio Details",
+        "description": "Create's a portfolio for a customer\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "create": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "customerid": {
+                          "type": "string"
+                        },
+                        "accountid": {
+                          "type": "string"
+                        },
+                        "currencyid": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the created portfolio(s)\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "CreateCustomerPortfolio": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Portfolio"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetPlacements/{customerid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customerid"
+        }
+      ],
+      "get": {
+        "summary": "List of Placements",
+        "description": "Returns list of customer placements\n",
+        "responses": {
+          "200": {
+            "description": "Returns list of customer placements\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetPlacements": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Placement"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetPlacement/{placementid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/placementid"
+        }
+      ],
+      "get": {
+        "summary": "List of Placement",
+        "description": "Returns list of customer placements\n",
+        "responses": {
+          "200": {
+            "description": "Returns list of customer placements\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "GetPlacement": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Placement"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CreatePlacements": {
+      "post": {
+        "summary": "Create a Placement",
+        "description": "Creates a placement\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "create": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "customerid": {
+                          "type": "string"
+                        },
+                        "fundid": {
+                          "type": "string"
+                        },
+                        "productid": {
+                          "type": "string"
+                        },
+                        "accountid": {
+                          "type": "string"
+                        },
+                        "currencyid": {
+                          "type": "string"
+                        },
+                        "investmentamount": {
+                          "type": "string"
+                        },
+                        "effectivedate": {
+                          "type": "string"
+                        },
+                        "tenor": {
+                          "type": "string",
+                          "description": "The tenor in days"
+                        },
+                        "maturitymandate": {
+                          "type": "string"
+                        },
+                        "interestrate": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the created placements\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "CreatePlacements": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Placement"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BusinessDate": {
+      "get": {
+        "summary": "Business Date",
+        "description": "Returns current date\n",
+        "responses": {
+          "200": {
+            "description": "Returns current date\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "BusinessDate": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "Current Date": {
+                                  "type": "string",
+                                  "format": "date"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/CreateTbillOrder": {
+      "post": {
+        "summary": "Create Tbill Order",
+        "description": "Creates an order for tbills\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customerid": {
+                    "type": "string"
+                  },
+                  "tbillid": {
+                    "type": "string"
+                  },
+                  "accountid": {
+                    "type": "string"
+                  },
+                  "currencyid": {
+                    "type": "string"
+                  },
+                  "discountrate": {
+                    "type": "string"
+                  },
+                  "facevalue": {
+                    "type": "string"
+                  },
+                  "investmenttype": {
+                    "type": "string"
+                  },
+                  "tenor": {
+                    "type": "string",
+                    "description": "Tenor in days"
+                  },
+                  "effectivedate": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns details about the placed tbill order\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "remarks": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "$ref": "#/components/schemas/TbillOrder"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetTbills": {
+      "get": {
+        "summary": "List Tbills",
+        "description": "Returns list of active tbills\n",
+        "responses": {
+          "200": {
+            "description": "Returns list of active tbills\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Tbill"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerTbillOrders/{customerid}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customerid"
+        }
+      ],
+      "get": {
+        "summary": "List Customer Tbill Orders",
+        "description": "Returns list of customer tbill orders\n",
+        "responses": {
+          "200": {
+            "description": "Returns list of  tbill orders for the customer\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TbillOrder"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/GetCustomerTbillOrders/{accountid}/{startdate}/{enddate}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/customerid"
+        },
+        {
+          "$ref": "#/components/parameters/startdate"
+        },
+        {
+          "$ref": "#/components/parameters/enddate"
+        }
+      ],
+      "get": {
+        "summary": "List Customer Tbill Orders",
+        "description": "Returns list of customer tbill orders filtered based on date\n",
+        "responses": {
+          "200": {
+            "description": "Returns list of  tbill orders for the customer\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TbillOrder"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/TbillLiquidation": {
+      "post": {
+        "summary": "Liquidate Tbill",
+        "description": "Initiate a Tbill Liquidation request\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "customerid": {
+                    "type": "string"
+                  },
+                  "productid": {
+                    "type": "string"
+                  },
+                  "tbillorderid": {
+                    "type": "string"
+                  },
+                  "maturitydate": {
+                    "type": "string"
+                  },
+                  "discountrate": {
+                    "type": "string"
+                  },
+                  "facevalue": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns details about the liquidation request\n",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "success"
+                      ]
+                    },
+                    "result": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string"
+                        },
+                        "remarks": {
+                          "type": "string"
+                        },
+                        "reference": {
+                          "$ref": "#/components/schemas/TbillLiquidation"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
